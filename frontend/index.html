@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AgroSmart – Empowering Agriculture with AI</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo"> Agro<span>Smart</span></div>
+  <div class="nav-links" id="navLinks">
+    <button class="nav-btn active" onclick="showTab('home',this)"> Home</button>
+    <button class="nav-btn" onclick="showTab('crop',this)"> Crop Rec.</button>
+    <button class="nav-btn" onclick="showTab('fertilizer',this)"> Fertilizer</button>
+    <button class="nav-btn" onclick="showTab('disease',this)"> Disease</button>
+    <button class="nav-btn" onclick="showTab('irrigation',this)"> Irrigation</button>
+    <button class="nav-btn" onclick="showTab('ai',this)"> AI Assistant</button>
+    <button class="nav-btn" onclick="showTab('weather',this)"> Weather</button>
+    <button class="nav-btn" onclick="showTab('market',this)"> Market</button>
+    <button class="nav-btn" onclick="showTab('schemes',this)"> Schemes</button>
+  </div>
+  <button class="nav-hamburger" onclick="toggleMobileNav()" id="hamburger">☰</button>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav-drawer" id="mobileNav">
+  <button class="mobile-nav-btn active" onclick="showTab('home',this,true)"> Home</button>
+  <button class="mobile-nav-btn" onclick="showTab('crop',this,true)"> Crop Recommendation</button>
+  <button class="mobile-nav-btn" onclick="showTab('fertilizer',this,true)"> Fertilizer Recommendation</button>
+  <button class="mobile-nav-btn" onclick="showTab('disease',this,true)"> Disease Detection</button>
+  <button class="mobile-nav-btn" onclick="showTab('irrigation',this,true)"> Irrigation Planner</button>
+  <button class="mobile-nav-btn" onclick="showTab('ai',this,true)"> AI Assistant</button>
+  <button class="mobile-nav-btn" onclick="showTab('weather',this,true)"> Weather Forecast</button>
+  <button class="mobile-nav-btn" onclick="showTab('market',this,true)"> Market Prices</button>
+  <button class="mobile-nav-btn" onclick="showTab('schemes',this,true)"> Government Schemes</button>
+</div>
+
+
+
+<!-- ======================== HOME TAB ======================== -->
+<div class="tab active" id="tab-home">
+  <!-- Hero -->
+  <section class="hero">
+    <span class="hero-float"></span>
+    <span class="hero-float"></span>
+    <span class="hero-float"></span>
+    <span class="hero-float"></span>
+    <div class="hero-content">
+      <div class="hero-badge"> AI-Powered Smart Farming</div>
+      <h1 class="hero-title">Empowering Agriculture<br>with <em>AI Intelligence</em></h1>
+      <p class="hero-sub">Helping Indian farmers make smarter decisions using real-time data, machine learning, and intelligent recommendations — from seed to harvest.</p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="showTab('crop',document.querySelector('.nav-btn:nth-child(2)'))"> Get Started</button>
+        <button class="btn-secondary" onclick="document.getElementById('about-section').scrollIntoView({behavior:'smooth'})">Learn More</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Strip -->
+  <div class="stats-strip">
+    <div class="stat-item"><div class="stat-num">600M+</div><div class="stat-label">Farmers in India</div></div>
+    <div class="stat-item"><div class="stat-num">₹18L Cr</div><div class="stat-label">Agricultural GDP</div></div>
+    <div class="stat-item"><div class="stat-num">50+</div><div class="stat-label">Crops Supported</div></div>
+    <div class="stat-item"><div class="stat-num">28</div><div class="stat-label">States Covered</div></div>
+  </div>
+
+  <!-- About Section -->
+  <section class="section" id="about-section">
+    <div class="section-header">
+      <h2 class="section-title"> Agriculture in India</h2>
+      <p class="section-sub">India is one of the world's largest agricultural nations, feeding billions and employing nearly half the workforce. Here's what makes it extraordinary.</p>
+    </div>
+    <div class="about-grid">
+      <div class="about-card"><div class="about-icon"></div><h3>Diverse Crop Heritage</h3><p>India grows over 200 commercially important crops including rice, wheat, sugarcane, cotton, pulses, and spices — across vastly different agro-climatic zones.</p></div>
+      <div class="about-card"><div class="about-icon"></div><h3>Water Management</h3><p>Agriculture uses ~80% of India's fresh water. Smart irrigation can save 30–40% water, dramatically improving sustainability for future generations.</p></div>
+      <div class="about-card"><div class="about-icon"></div><h3>Soil Diversity</h3><p>India has 8 major soil types — alluvial, black, red, laterite, desert, mountain, forest, and saline — each suited to specific crops and requiring tailored care.</p></div>
+      <div class="about-card"><div class="about-icon"></div><h3>AI Revolution</h3><p>AI-powered tools can increase farm productivity by 25%, reduce losses by 20%, and help smallholder farmers access the same intelligence as large enterprises.</p></div>
+      <div class="about-card"><div class="about-icon"></div><h3>Climate Challenges</h3><p>Erratic monsoons, rising temperatures, and extreme weather events cost Indian agriculture ₹50,000+ crore annually. Smart forecasting is critical for resilience.</p></div>
+      <div class="about-card"><div class="about-icon"></div><h3>Government Support</h3><p>Over 30 central schemes like PM-KISAN, PMFBY, and RKVY provide financial safety nets, insurance, and investment in agricultural modernization.</p></div>
+    </div>
+  </section>
+
+  <!-- Charts Section -->
+  <section class="section section-alt">
+    <div class="section-header">
+      <h2 class="section-title"> Agricultural Data Dashboard</h2>
+      <p class="section-sub">Visualizing key trends in Indian agriculture — crop production, rainfall patterns, and soil distribution across states.</p>
+    </div>
+    <div class="charts-grid" id="chartsGrid">
+      <div class="chart-card"><h3>Crop Production (Million Tonnes, 2023)</h3><canvas id="cropChart" height="220"></canvas></div>
+      <div class="chart-card"><h3> Average Annual Rainfall by Region (mm)</h3><canvas id="rainfallChart" height="220"></canvas></div>
+      <div class="chart-card"><h3> Soil Type Distribution (%)</h3><canvas id="soilChart" height="220"></canvas></div>
+      <div class="chart-card"><h3> Yearly Crop Production Trend (Million Tonnes)</h3><canvas id="trendChart" height="220"></canvas></div>
+    </div>
+  </section>
+
+  <!-- Features Grid -->
+  <section class="section section-sky">
+    <div class="section-header">
+      <h2 class="section-title">What AgroSmart Offers</h2>
+      <p class="section-sub">A complete precision farming ecosystem for every stage of the agricultural journey.</p>
+    </div>
+    <div class="about-grid">
+      <div class="about-card" style="cursor:pointer" onclick="showTab('crop',null)"><div class="about-icon">🌾</div><h3>Crop Recommendation</h3><p>AI-driven crop suggestions based on soil type, pH, climate, and rainfall data specific to your region.</p></div>
+      <div class="about-card" style="cursor:pointer" onclick="showTab('fertilizer',null)"><div class="about-icon">🌿</div><h3>Fertilizer Planner</h3><p>Personalized NPK-based fertilizer recommendations with organic alternatives to maximize yield.</p></div>
+      <div class="about-card" style="cursor:pointer" onclick="showTab('disease',null)"><div class="about-icon">🦠</div><h3>Disease Detection</h3><p>Upload a leaf photo and get instant AI-powered disease diagnosis with treatment protocols.</p></div>
+      <div class="about-card" style="cursor:pointer" onclick="showTab('irrigation',null)"><div class="about-icon">💧</div><h3>Smart Irrigation</h3><p>Weekly irrigation scheduling based on crop, soil, weather, and growth stage for optimal water use.</p></div>
+      <div class="about-card" style="cursor:pointer" onclick="showTab('weather',null)"><div class="about-icon">🌦️</div><h3>Weather Intelligence</h3><p>Hyper-local 7-day forecasts with agricultural advisories to protect your crops from extreme weather.</p></div>
+      <div class="about-card" style="cursor:pointer" onclick="showTab('market',null)"><div class="about-icon">💰</div><h3>Market Prices</h3><p>Live mandi prices, price trends, and best market recommendations to maximize your profits.</p></div>
+    </div>
+  </section>
+
+  <div class="download-bar">
+    <button class="btn-download" onclick="generateReport()">Download Full Smart Report</button>
+  </div>
+</div>
+
+<!-- ======================== CROP TAB ======================== -->
+<div class="tab" id="tab-crop">
+  <div class="module-header">
+    <h1> Crop Recommendation Engine</h1>
+    <p>Enter your field conditions including soil NPK values and get AI-powered crop suggestions with full reasoning.</p>
+  </div>
+  <div class="module-body">
+    <div class="form-grid">
+      <!-- Field Conditions -->
+      <div class="form-section-label"> Field Conditions</div>
+      <div class="form-group">
+        <label>Soil Type</label>
+        <select class="form-control" id="c-soil">
+          <option value="">Select Soil Type</option>
+          <option>Alluvial</option><option>Black (Regur)</option><option>Red</option>
+          <option>Laterite</option><option>Sandy</option><option>Loamy</option><option>Clayey</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>pH Level (4–9)</label>
+        <input type="number" class="form-control" id="c-ph" placeholder="e.g. 6.5" min="4" max="9" step="0.1">
+      </div>
+      <div class="form-group">
+        <label>Temperature (°C)</label>
+        <input type="number" class="form-control" id="c-temp" placeholder="e.g. 28" min="5" max="50">
+      </div>
+      <div class="form-group">
+        <label>Annual Rainfall (mm)</label>
+        <input type="number" class="form-control" id="c-rain" placeholder="e.g. 900" min="50" max="4000">
+      </div>
+      <div class="form-group">
+        <label>State / Location</label>
+        <select class="form-control" id="c-loc">
+          <option value="">Select State</option>
+          <option>Tamil Nadu</option><option>Punjab</option><option>Uttar Pradesh</option>
+          <option>Maharashtra</option><option>Karnataka</option><option>Andhra Pradesh</option>
+          <option>West Bengal</option><option>Rajasthan</option><option>Gujarat</option><option>Kerala</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Humidity (%)</label>
+        <input type="number" class="form-control" id="c-humid" placeholder="e.g. 65" min="10" max="100">
+      </div>
+      <!-- Soil NPK -->
+      <div class="form-section-label"> Soil NPK Values (kg/hectare) — Optional</div>
+      <div class="form-group">
+        <label>Nitrogen (N) kg/ha</label>
+        <input type="number" class="form-control" id="c-n" placeholder="e.g. 80" min="0" max="400">
+      </div>
+      <div class="form-group">
+        <label>Phosphorus (P) kg/ha</label>
+        <input type="number" class="form-control" id="c-p" placeholder="e.g. 40" min="0" max="300">
+      </div>
+      <div class="form-group">
+        <label>Potassium (K) kg/ha</label>
+        <input type="number" class="form-control" id="c-k" placeholder="e.g. 40" min="0" max="300">
+      </div>
+    </div>
+    <button class="btn-primary" onclick="getCropRec()"> Recommend Crop</button>
+    <div class="result-box" id="cropResult">
+      <div class="result-title" id="cropResultTitle"> Top Recommended Crop</div>
+      <div id="cropResultBody"></div>
+    </div>
+  </div>
+  <div class="download-bar">
+    <button class="btn-download" onclick="generateReport()"> Download Report</button>
+  </div>
+</div>
+
+<!-- ======================== FERTILIZER TAB ======================== -->
+<div class="tab" id="tab-fertilizer">
+  <div class="module-header">
+    <h1> Fertilizer Recommendation</h1>
+    <p>Enter your crop, current soil NPK, and growing conditions to get a precise fertilizer plan with organic alternatives.</p>
+  </div>
+  <div class="module-body">
+    <div class="form-grid">
+      <!-- Crop & Stage -->
+      <div class="form-section-label"> Crop Information</div>
+      <div class="form-group">
+        <label>Crop Type</label>
+        <select class="form-control" id="f-crop">
+          <option value="">Select Crop</option>
+          <option>Rice</option><option>Wheat</option><option>Sugarcane</option>
+          <option>Cotton</option><option>Maize</option><option>Tomato</option>
+          <option>Potato</option><option>Onion</option><option>Groundnut</option><option>Soybean</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Growth Stage</label>
+        <select class="form-control" id="f-stage">
+          <option>Sowing</option><option>Seedling</option><option>Vegetative</option><option>Flowering</option><option>Fruiting</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Soil Type</label>
+        <select class="form-control" id="f-soil">
+          <option value="">Select Soil</option>
+          <option>Alluvial</option><option>Black</option><option>Red</option><option>Loamy</option><option>Sandy</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Field Area (hectares)</label>
+        <input type="number" class="form-control" id="f-area" placeholder="e.g. 2" min="0.1" max="100" step="0.1">
+      </div>
+      <!-- Current Soil NPK -->
+      <div class="form-section-label"> Current Soil NPK (kg/hectare)</div>
+      <div class="form-group">
+        <label>Nitrogen (N) kg/ha</label>
+        <input type="number" class="form-control" id="f-n" placeholder="e.g. 40" min="0" max="300">
+      </div>
+      <div class="form-group">
+        <label>Phosphorus (P) kg/ha</label>
+        <input type="number" class="form-control" id="f-p" placeholder="e.g. 20" min="0" max="200">
+      </div>
+      <div class="form-group">
+        <label>Potassium (K) kg/ha</label>
+        <input type="number" class="form-control" id="f-k" placeholder="e.g. 15" min="0" max="200">
+      </div>
+      <!-- Growing Conditions -->
+      <div class="form-section-label"> Growing Conditions</div>
+      <div class="form-group">
+        <label>Soil pH</label>
+        <input type="number" class="form-control" id="f-ph" placeholder="e.g. 6.5" min="4" max="9" step="0.1">
+      </div>
+      <div class="form-group">
+        <label>Temperature (°C)</label>
+        <input type="number" class="form-control" id="f-temp" placeholder="e.g. 30" min="5" max="50">
+      </div>
+      <div class="form-group">
+        <label>Humidity (%)</label>
+        <input type="number" class="form-control" id="f-humid" placeholder="e.g. 65" min="10" max="100">
+      </div>
+    </div>
+    <button class="btn-primary" onclick="getFertRec()"> Get Fertilizer Plan</button>
+    <div class="result-box" id="fertResult">
+      <div class="result-title"> Fertilizer Recommendation</div>
+      <div id="fertResultBody"></div>
+    </div>
+  </div>
+  <div class="download-bar">
+    <button class="btn-download" onclick="generateReport()"> Download Report</button>
+  </div>
+</div>
+
+<!-- ======================== DISEASE TAB ======================== -->
+<div class="tab" id="tab-disease">
+  <div class="module-header">
+    <h1> Plant Disease Detection</h1>
+    <p>Upload a leaf photo for instant AI-powered disease analysis and treatment recommendations.</p>
+  </div>
+  <div class="module-body">
+    <div class="upload-zone" onclick="document.getElementById('leafInput').click()" id="uploadZone">
+      <div class="uz-icon">📷</div>
+      <p><strong>Click to upload</strong> or drag & drop a leaf image</p>
+      <p style="font-size:0.8rem;color:var(--text-light);margin-top:6px;">Supports JPG, PNG, WebP — Max 10MB</p>
+      <img id="leaf-preview" alt="Leaf preview">
+    </div>
+    <input type="file" id="leafInput" accept="image/*" style="display:none" onchange="previewLeaf(event)">
+    <br>
+    <button class="btn-primary" onclick="detectDisease()" id="detectBtn" style="display:none">🔍 Analyze Disease</button>
+    <div class="result-box" id="diseaseResult">
+      <div class="result-title"> Disease Analysis Result</div>
+      <div id="diseaseResultBody"></div>
+    </div>
+  </div>
+  <div class="download-bar">
+    <button class="btn-download" onclick="generateReport()"> Download Report</button>
+  </div>
+</div>
+
+<!-- ======================== IRRIGATION TAB ======================== -->
+<div class="tab" id="tab-irrigation">
+  <div class="module-header">
+    <h1> Smart Irrigation Planner</h1>
+    <p>Personalized weekly irrigation schedules based on your crop, soil, and weather conditions.</p>
+  </div>
+  <div class="module-body">
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Crop Type</label>
+        <select class="form-control" id="i-crop">
+          <option value="">Select Crop</option>
+          <option>Rice</option><option>Wheat</option><option>Cotton</option><option>Sugarcane</option>
+          <option>Maize</option><option>Tomato</option><option>Potato</option><option>Groundnut</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Soil Type</label>
+        <select class="form-control" id="i-soil">
+          <option value="">Select Soil</option>
+          <option>Clay</option><option>Sandy</option><option>Loamy</option><option>Alluvial</option><option>Black</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Growth Stage</label>
+        <select class="form-control" id="i-stage">
+          <option>Seedling</option><option>Vegetative</option><option>Flowering</option><option>Harvest</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Temperature (°C)</label>
+        <input type="number" class="form-control" id="i-temp" placeholder="e.g. 32" min="5" max="50">
+      </div>
+      <div class="form-group">
+        <label>Recent Rainfall (mm/week)</label>
+        <input type="number" class="form-control" id="i-rain" placeholder="e.g. 20" min="0" max="500">
+      </div>
+      <div class="form-group">
+        <label>Humidity (%)</label>
+        <input type="number" class="form-control" id="i-humid" placeholder="e.g. 70" min="10" max="100">
+      </div>
+    </div>
+    <button class="btn-primary" onclick="getIrrigation()"> Generate Irrigation Plan</button>
+    <div class="result-box" id="irrigResult">
+      <div class="result-title"> Irrigation Schedule</div>
+      <div id="irrigResultBody"></div>
+      <h3 style="font-size:0.95rem;color:var(--text-mid);margin:24px 0 12px">📅 Weekly Calendar</h3>
+      <div class="cal-grid" id="irrigCal"></div>
+      <div class="irrigation-tips" id="irrigTips"></div>
+    </div>
+  </div>
+  <div class="download-bar">
+    <button class="btn-download" onclick="generateReport()"> Download Report</button>
+  </div>
+</div>
+
+<!-- ======================== AI ASSISTANT TAB ======================== -->
+<div class="tab" id="tab-ai">
+  <div class="module-header">
+    <h1> AI Farming Assistant</h1>
+    <p>Ask anything about farming, crops, soil, weather, or best practices. Powered by AI.</p>
+  </div>
+  <div class="module-body">
+    <div class="chat-container">
+      <div class="chat-messages" id="chatMessages">
+        <div class="msg bot"> <strong>Hello!</strong> I'm your AgroSmart AI Assistant. Ask me anything about farming — crop selection, disease treatment, irrigation tips, weather advisory, or government schemes. How can I help you today?</div>
+      </div>
+      <div class="chat-input-row">
+        <input type="text" class="chat-input" id="chatInput" placeholder="Ask about farming, crops, soil, diseases..." onkeydown="if(event.key==='Enter')sendChat()">
+        <button class="chat-send" onclick="sendChat()">➤</button>
+      </div>
+    </div>
+    <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="mod-tab-btn" onclick="quickChat('What crops grow best in Tamil Nadu?')"> Tamil Nadu crops</button>
+      <button class="mod-tab-btn" onclick="quickChat('How to treat rice blast disease?')">Rice blast treatment</button>
+      <button class="mod-tab-btn" onclick="quickChat('Best irrigation method for wheat?')"> Wheat irrigation</button>
+      <button class="mod-tab-btn" onclick="quickChat('When to apply urea fertilizer?')"> Urea application</button>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== WEATHER TAB ======================== -->
+<div class="tab" id="tab-weather">
+  <div class="module-header">
+    <h1> Weather Intelligence</h1>
+    <p>Real-time weather data and 7-day agricultural forecast for your farming decisions.</p>
+  </div>
+  <div class="module-body">
+    <div style="display:flex;gap:14px;margin-bottom:24px;flex-wrap:wrap">
+      <input type="text" class="form-control" id="w-location" placeholder="Enter your city (e.g. Coimbatore)" style="max-width:320px">
+      <button class="btn-primary" onclick="getWeather()"> Get Weather</button>
+    </div>
+    <div id="weatherDisplay">
+      <div class="weather-hero">
+        <div style="font-size:4rem;margin-bottom:8px"></div>
+        <div class="weather-temp">32°C</div>
+        <div class="weather-condition">Partly Cloudy</div>
+        <div class="weather-location">📍 Coimbatore, Tamil Nadu</div>
+        <div style="margin-top:16px;opacity:0.7;font-size:0.85rem">🌅 Sunrise 6:12 AM &nbsp;|&nbsp; 🌇 Sunset 6:48 PM &nbsp;|&nbsp; Feels like 36°C</div>
+      </div>
+      <div class="weather-details-grid">
+        <div class="weather-detail"><div class="wd-icon">💧</div><div class="wd-val">68%</div><div class="wd-label">Humidity</div></div>
+        <div class="weather-detail"><div class="wd-icon">💨</div><div class="wd-val">14 km/h</div><div class="wd-label">Wind Speed</div></div>
+        <div class="weather-detail"><div class="wd-icon">🌧️</div><div class="wd-val">15%</div><div class="wd-label">Rain Chance</div></div>
+        <div class="weather-detail"><div class="wd-icon">👁️</div><div class="wd-val">10 km</div><div class="wd-label">Visibility</div></div>
+        <div class="weather-detail"><div class="wd-icon">🌡️</div><div class="wd-val">1012 hPa</div><div class="wd-label">Pressure</div></div>
+        <div class="weather-detail"><div class="wd-icon">☀️</div><div class="wd-val">8/10</div><div class="wd-label">UV Index</div></div>
+      </div>
+      <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;margin:28px 0 14px;color:var(--text-dark)">📅 7-Day Forecast</h3>
+      <div class="forecast-grid" id="forecastGrid"></div>
+      <div style="margin-top:24px;background:var(--yellow-soft);border-radius:var(--radius);padding:20px;border-left:4px solid var(--yellow)">
+        <h4 style="margin-bottom:10px;color:var(--brown)"> Agricultural Advisory</h4>
+        <p style="font-size:0.88rem;color:var(--text-mid);line-height:1.7">
+          ☀️ <strong>High UV:</strong> Avoid spraying pesticides between 10 AM – 3 PM.<br>
+          💧 <strong>Low rain chance:</strong> Irrigate crops every 2–3 days this week.<br>
+          🌡️ <strong>Warm temperatures:</strong> Ideal for vegetative growth. Monitor for aphids.<br>
+          💨 <strong>Moderate winds:</strong> Safe for spraying operations in morning hours.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="download-bar">
+    <button class="btn-download" onclick="generateReport()">📥 Download Report</button>
+  </div>
+</div>
+
+<!-- ======================== MARKET TAB ======================== -->
+<div class="tab" id="tab-market">
+  <div class="module-header">
+    <h1> Market Price Tracker</h1>
+    <p>Live mandi prices across India. Know when and where to sell for maximum profit.</p>
+  </div>
+  <div class="module-body">
+    <div class="filter-row">
+      <select class="form-control" id="m-crop" style="max-width:200px" onchange="filterMarket()">
+        <option value="">All Crops</option>
+        <option>Rice</option><option>Wheat</option><option>Maize</option><option>Tomato</option>
+        <option>Onion</option><option>Potato</option><option>Sugarcane</option><option>Cotton</option>
+      </select>
+      <select class="form-control" id="m-state" style="max-width:200px" onchange="filterMarket()">
+        <option value="">All States</option>
+        <option>Tamil Nadu</option><option>Punjab</option><option>UP</option><option>Maharashtra</option>
+        <option>Karnataka</option><option>Gujarat</option>
+      </select>
+    </div>
+    <table class="market-table" id="marketTable">
+      <thead>
+        <tr>
+          <th>Crop</th><th>Mandi</th><th>State</th>
+          <th>Min ₹/Qtl</th><th>Max ₹/Qtl</th><th>Modal ₹/Qtl</th><th>Trend</th>
+        </tr>
+      </thead>
+      <tbody id="marketBody"></tbody>
+    </table>
+    <p style="font-size:0.8rem;color:var(--text-light);margin-top:12px">*Prices are indicative. Verify with your local mandi before selling.</p>
+  </div>
+</div>
+
+<!-- ======================== SCHEMES TAB ======================== -->
+<div class="tab" id="tab-schemes">
+  <div class="module-header">
+    <h1> Government Schemes for Farmers</h1>
+    <p>Access central and state agricultural schemes, subsidies, and support programs you're eligible for.</p>
+  </div>
+  <div class="module-body">
+    <div class="schemes-grid" id="schemesGrid"></div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
